@@ -22,7 +22,7 @@ void draw() {
     c.write(pmouseX + " " + pmouseY + " " + mouseX + " " + mouseY + "\n");
   }
 
-  // Receive data from Server
+  // Receive data from servers
   if (c.available() > 0) { 
     input = c.readString(); 
     input = input.substring(0,input.indexOf("\n"));  // Only up to the newline
