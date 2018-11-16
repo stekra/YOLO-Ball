@@ -1,5 +1,7 @@
 import processing.net.*; 
 
+//hello github!
+
 Client c; 
 String input;
 int data[]; 
