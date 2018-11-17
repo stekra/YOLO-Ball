@@ -1,6 +1,11 @@
 import processing.net.*; 
 
-//hello github!
+//object setup suggestion:
+//Board > Square/Spot > Piece
+//maybe a Player object which has a list of all Pieces of the player?
+//maybe unnecessary
+//idk
+//pls respond
 
 Client c; 
 String input;
@@ -23,9 +28,8 @@ void setup() {
     }
   } 
   stroke(0);
-  frameRate(60); // Slow it down a little
-  // Connect to the server’s IP address and port­
-  c = new Client(this, "10.128.136.193", 8080); // Replace with your server’s IP and port
+  frameRate(60);
+  c = new Client(this, "10.128.136.193", 8080);
 } 
 
 void draw() {         
