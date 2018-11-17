@@ -7,6 +7,18 @@ import processing.net.*;
 //idk
 //pls respond
 
+//draft of a move() function:
+
+void move(Square currentPos, Square newPos) {
+  if (currentPos.piece.isValidMove()) { 
+    if (newPos.piece != null) {
+      newPos.piece.remove();
+    }
+    //currentPos.piece.moveTo(newPos);
+    //newPos.piece.yolo();
+  }
+}
+
 Client c; 
 String input;
 int data[];
@@ -16,15 +28,15 @@ int boardPieceHeight = canvasSize/8;
 
 void setup() { 
   size(480, 480); 
-  
-  for(int l = 0; l < 8; l++){
-    for(int b = 0; b < 8; b++){
-      if((l + b + 1) % 2 == 0){
+
+  for (int l = 0; l < 8; l++) {
+    for (int b = 0; b < 8; b++) {
+      if ((l + b + 1) % 2 == 0) {
         fill(0);
-      } else{
+      } else {
         fill(255);
       }
-      rect(l * boardPieceWidth, b * boardPieceHeight, (l + 1) * boardPieceWidth,(b + 1) * boardPieceHeight);
+      rect(l * boardPieceWidth, b * boardPieceHeight, (l + 1) * boardPieceWidth, (b + 1) * boardPieceHeight);
     }
   } 
   stroke(0);
@@ -44,10 +56,10 @@ void draw() {
   // Receive data from servers
   if (c.available() > 0) { 
     input = c.readString(); 
-    input = input.substring(0,input.indexOf("\n"));  // Only up to the newline
+    input = input.substring(0, input.indexOf("\n"));  // Only up to the newline
     data = int(split(input, ' '));  // Split values into an array
     // Draw line using received coords
     stroke(0);
-    line(data[0], data[1], data[2], data[3]); 
-  } 
+    line(data[0], data[1], data[2], data[3]);
+  }
 }

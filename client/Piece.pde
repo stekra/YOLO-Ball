@@ -15,8 +15,12 @@ class Piece {
     return true;
   }
 
-  void move(/* Square/Spot or coord*/) {
+  void moveTo(/* Square/Spot or coord*/) {
     //change piece x, y;
+  }
+  
+  void yolo() {
+    //tranform into random piece
   }
 
   void remove() {
