@@ -34,7 +34,10 @@ class Ball {
     velocity.y = 0;
     velocity.y -= jumpForce;
   }
-  void outOfBounds(){
-    
+  boolean outOfBounds(){
+    if (position.y > height){
+    return true;
+    }
+    else return false;
   }
 }

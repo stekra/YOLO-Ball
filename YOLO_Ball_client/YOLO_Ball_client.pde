@@ -18,6 +18,9 @@ void draw () {
    //ball calculation
   for(int i = 0; i < ballList.size(); i++) {
     ballList.get(i).movement();
+    if (ballList.get(i).outOfBounds()){
+      ballList.remove(i);
+    }
   }
 }
 void mousePressed(){
