@@ -44,8 +44,6 @@ void serverEvent(Server serv, Client clie) {
   
   if (!clients.contains(clie))
     clients.add(clie);
-    
-  //connected++;
 }
 
 void disconnectEvent(Client clie) {
@@ -53,6 +51,4 @@ void disconnectEvent(Client clie) {
   
   if (clients.contains(clie))
     clients.remove(clie);
-    
-  //connected--;
 }
