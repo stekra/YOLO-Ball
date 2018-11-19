@@ -12,12 +12,12 @@ class Ball {
   PVector velocity = new PVector(xSpeed,ySpeed);
   
   
-  void movement(){
-    if (position.x - size/2 < 0){
+  void movement() {
+    if (position.x - size/2 < 0) {
     position.x = size/2;
     velocity.x *= -1;
     }
-    if (position.x + size/2 > width){
+    if (position.x + size/2 > width) {
     position.x = width - size/2;
     velocity.x *= -1;
     }
@@ -26,10 +26,12 @@ class Ball {
     position.add(velocity);
     display();
   }
-  void display(){
+  
+  void display() {
     ellipse(position.x,position.y,size,size);
   }
-  void jump(){
+  
+  void jump() {
     velocity.y = 0;
     velocity.y -= jumpForce;
   }
