@@ -3,8 +3,8 @@ class Ball {
   float y = height/2;
   float size = 30;
   float radius = size / 2;
-  float grav = 0.5;
-  float airFriction = 0.1;
+  float grav = size/60;
+  float airFriction = size/300;
   float jumpForce = 20;
 
   float xSpeed = -10;
@@ -45,7 +45,6 @@ class Ball {
   void jump() {
     velocity.y = 0;
     velocity.y -= jumpForce;
-    velocity.x += player1.playerSpeed() * 0.5;
   }
 
   boolean outOfBounds() {

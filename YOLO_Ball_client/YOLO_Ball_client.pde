@@ -1,4 +1,6 @@
 ArrayList<Ball> ballList = new ArrayList <Ball>();
+int scoreTeam1;
+int scoreTeam2;
 
 Player player1;
 Player player2;
@@ -11,6 +13,7 @@ void settings() {
 void setup() {
   player1 = new Player(0,width/2-20);
   player2 = new Player(width/2+20, width);
+  noSmooth();
 }
 
 void draw() {

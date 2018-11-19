@@ -34,7 +34,7 @@ class Player {
        && newBall.position.y + newBall.radius > y
        && newBall.position.x - newBall.radius < x + xWidth
        && newBall.position.y - newBall.radius < y + yHeight) {
-        println("collision");
+        newBall.velocity.x += playerSpeed() *0.5;
         newBall.jump();
       }
     }
