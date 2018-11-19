@@ -2,6 +2,7 @@ class Ball {
   float x = width/2;
   float y = height/2;
   float size = 30;
+  float radius = size / 2;
   float grav = 0.5;
   float jumpForce = 15;
   
@@ -12,13 +13,13 @@ class Ball {
   PVector velocity = new PVector(xSpeed,ySpeed);
   
   
-  void movement(){
-    if (position.x - size/2 < 0){
-    position.x = size/2;
+  void movement() {
+    if (position.x - radius < 0){
+    position.x = radius;
     velocity.x *= -1;
     }
-    if (position.x + size/2 > width){
-    position.x = width - size/2;
+    if (position.x + radius > width){
+    position.x = width - radius;
     velocity.x *= -1;
     }
     
@@ -26,11 +27,14 @@ class Ball {
     position.add(velocity);
     display();
   }
-  void display(){
+  void display() {
     ellipse(position.x,position.y,size,size);
   }
-  void jump(){
+  void jump() {
     velocity.y = 0;
     velocity.y -= jumpForce;
+  }
+  void outOfBounds(){
+    
   }
 }

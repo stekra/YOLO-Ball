@@ -19,8 +19,8 @@ class Player {
   }
   void colisionBall (){
     for (Ball newBall : ballList){
-      if (newBall.position.x + newBall.size/2 > x && newBall.position.y + newBall.size/2 > y &&
-      newBall.position.x - newBall.size/2 < x + xWidth && newBall.position.y - newBall.size/2 < y + yHeight){
+      if (newBall.position.x + newBall.radius > x && newBall.position.y + newBall.radius > y &&
+      newBall.position.x - newBall.radius < x + xWidth && newBall.position.y - newBall.radius < y + yHeight){
       println("collision");
       newBall.jump();
       }
