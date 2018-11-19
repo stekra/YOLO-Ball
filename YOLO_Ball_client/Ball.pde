@@ -6,9 +6,10 @@ class Ball {
   float grav = size/60;
   float airFriction = size/300;
   float jumpForce = 20;
+  int random = -1 + (int)random(2) * 2;
 
-  float xSpeed = -10;
-  float ySpeed;
+  float xSpeed = -7 * random;
+  float ySpeed = -10;
 
   PVector position = new PVector(x, y);
   PVector velocity = new PVector(xSpeed, ySpeed);
@@ -39,6 +40,7 @@ class Ball {
   }
 
   void display() {
+    stroke(0);
     ellipse(position.x, position.y, size, size);
   }
 
@@ -49,7 +51,16 @@ class Ball {
 
   boolean outOfBounds() {
     if (position.y > height) {
+      if (position.x > width/2) {
+        scoreTeam1++;
+      }
+      else {
+        scoreTeam2++;
+      }
       return true;
-    } else return false;
+    } 
+    else {
+      return false;
+    }
   }
 }

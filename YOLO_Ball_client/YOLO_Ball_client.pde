@@ -1,6 +1,6 @@
 ArrayList<Ball> ballList = new ArrayList <Ball>();
-int scoreTeam1;
-int scoreTeam2;
+int scoreTeam1 = 0;
+int scoreTeam2 = 0;
 
 Player player1;
 Player player2;
