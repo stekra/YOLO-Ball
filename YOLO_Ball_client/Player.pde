@@ -1,17 +1,27 @@
 class Player {
+  
   float moveSpeed = 10f;
   float lerpAmount = 0.25f;
 
   float x = width/2;
-  float y = 6*90 -  40;
-  float xWidth = 50;
+  float y = 6*90 - 40;
+  float xWidth = 100;
   float yHeight = 10;
-
+  float px;
+  float constrainLeft;
+  float constrainRight;
+  
+  public Player(float cL, float cR) {
+    this.constrainLeft = cL;
+    this.constrainRight = cR;
+  }
 
   void movement() {
     x = lerp(x, mouseX - (xWidth/2), lerpAmount);
+    x = constrain(x,constrainLeft, constrainRight-xWidth);
     display();
     colisionBall();
+    px = x;
   }
 
   void display() {
@@ -28,5 +38,8 @@ class Player {
         newBall.jump();
       }
     }
+  }
+  float playerSpeed () {
+    return x - px;    
   }
 }

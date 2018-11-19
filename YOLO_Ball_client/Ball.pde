@@ -4,7 +4,8 @@ class Ball {
   float size = 30;
   float radius = size / 2;
   float grav = 0.5;
-  float jumpForce = 15;
+  float airFriction = 0.1;
+  float jumpForce = 20;
 
   float xSpeed = -10;
   float ySpeed;
@@ -14,6 +15,7 @@ class Ball {
 
 
   void movement() {
+    //border check
     if (position.x - radius < 0) {
       position.x = radius;
       velocity.x *= -1;
@@ -21,6 +23,14 @@ class Ball {
     if (position.x + radius > width) {
       position.x = width - radius;
       velocity.x *= -1;
+    }
+    // xSpeed reduction
+    if (velocity.x < 0) {
+      velocity.x += airFriction;
+    }
+    
+    if (velocity.x > 0) {
+      velocity.x -= airFriction;
     }
 
     velocity.y += grav;
@@ -35,6 +45,7 @@ class Ball {
   void jump() {
     velocity.y = 0;
     velocity.y -= jumpForce;
+    velocity.x += player1.playerSpeed() * 0.5;
   }
 
   boolean outOfBounds() {

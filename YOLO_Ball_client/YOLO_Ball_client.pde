@@ -1,6 +1,7 @@
 ArrayList<Ball> ballList = new ArrayList <Ball>();
 
-Player player1 = new Player();
+Player player1;
+Player player2;
 
 void settings() {
   int canvasSize = 60;
@@ -8,11 +9,16 @@ void settings() {
 }
 
 void setup() {
+  player1 = new Player(0,width/2-20);
+  player2 = new Player(width/2+20, width);
 }
 
 void draw() {
   background(0);
+  fill(255);
   player1.movement();
+  player2.movement();
+  drawNet();
 
   //ball calculation
   for (int i = 0; i < ballList.size(); i++) {
