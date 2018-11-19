@@ -31,7 +31,7 @@ int[] readFromClient() {
   input = c.readString(); 
   input = input.substring(0, input.indexOf("\n"));
   int[] array = int(split(input, ' '));
-
+  
   return array;
 }
 
