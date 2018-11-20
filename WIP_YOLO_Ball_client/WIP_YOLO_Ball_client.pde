@@ -27,7 +27,7 @@ void setup() {
 }
 
 void draw() {  
-  c.write(mouseX + "\n");
+  c.write(mouseX + " " + "0" + "\n");
 
   if (c.available() > 0) {
     data = readFromServer();
@@ -42,7 +42,7 @@ void draw() {
 }
 
 void mousePressed() {
-  c.write(-1 + "\n");  //start command
+  c.write(mouseX + " " + "1" + "\n");  //start command
   println("sent started");
 }
 

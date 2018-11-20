@@ -6,7 +6,7 @@ Server s;
 int port = 8080;
 String input;
 float[] data = {0, width/2+20, width/2, height/2};  //content: [player1X, player2X ballX, ballY]
-float[] inputData = {0};
+float[] inputData = {0, 0};
 ArrayList<String> clients = new ArrayList<String>();
 int connected;
 //</network stuff>
@@ -43,7 +43,7 @@ void draw() {
     inputData = readFromClient();
   }
 
-  if (inputData[0] == -1.) {
+  if (inputData[1] == 1f) {
     started = true;
     println("received start cmd");
   }
