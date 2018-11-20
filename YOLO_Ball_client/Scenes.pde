@@ -1,4 +1,4 @@
-void drawNet() {
+void drawInGame() {
   color netColor = 255; 
   
   netWalls();
@@ -28,5 +28,17 @@ void drawScore() {
 }
 
 void startScreen() {
+  color startScreenColor = 255;
+  background(0);
+  textAlign(CENTER);
+  noStroke();
+  fill(startScreenColor);
+  textSize(150);
+  text("YOLO BALL",width/2,200);
+  
+  textSize(25);
+  text("a Game Frame I Project\nby Stefan Kraft && Moreno Vogel",width/2,300);
+  
+  text("Press Space to Start", width/2,410);
   
 }

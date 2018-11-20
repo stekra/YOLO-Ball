@@ -1,7 +1,7 @@
 class Ball {
   float x = width/2;
   float y = height/2;
-  float size = 30;
+  float size = random(20,45);
   float radius = size / 2;
   float grav = size/60;
   float airFriction = size/300;
@@ -32,8 +32,11 @@ class Ball {
       velocity.x += airFriction;
     }
     
-    if (velocity.x > 0) {
+    else if (velocity.x > 0) {
       velocity.x -= airFriction;
+    }
+    if (velocity.x > -0.09 && velocity.x < 0.09){
+      velocity.x = 0;
     }
 
     velocity.y += grav;
@@ -43,7 +46,17 @@ class Ball {
 
   void display() {
     stroke(0);
+    fill(255);
     ellipse(position.x, position.y, size, size);
+    offScreenDisplay();
+  }
+  
+  void offScreenDisplay() {
+    if (position.y < 0) {
+      noStroke();
+      fill(255, 100-position.y*2);
+      triangle(position.x, 11, position.x+5, 20,position.x-5, 20);
+    }
   }
 
   void jump(float jumpForce) {
@@ -53,10 +66,10 @@ class Ball {
 
   boolean outOfBounds() {
     if (position.y > height) {
-      if (position.x > width/2) {
+      if (position.x > width/2 && !startScreen) {
         scoreTeam1++;
       }
-      else {
+      else if (position.x < width/2 && !startScreen) {
         scoreTeam2++;
       }
       return true;
@@ -66,12 +79,18 @@ class Ball {
     }
   }
   void colisionWithNet() {
-    if (position.x+radius > net.x && position.x-radius < net.x+net.xWidth && position.y+radius > net.y) {
+    if (position.x+radius > net.x && position.x-radius < net.x+net.xWidth && position.y+radius > net.y && startScreen == false) {
       //horicontal Bounce
-      if (velocity.y > 0 && position.y+radius < net.y+10) {
+      if (velocity.y > 0 && position.y+radius < net.y+20) {
         jump(10);
+        //check if on net and slow
         if (velocity.x < 1 && velocity.x > -1) {
-          velocity.x += 3;
+          if (position.x > width/2){ 
+            velocity.x += 3;
+          }
+          else {
+            velocity.x -= 3;
+          }
         }
       }
       else if (velocity.x > 0) {
