@@ -8,6 +8,7 @@ float[] data = {0, width/2+20, width/2, height/2}; //content: [player1X, player2
 ArrayList<Ball> ballList = new ArrayList <Ball>();
 int scoreTeam1 = 0;
 int scoreTeam2 = 0;
+boolean started = false;
 
 Player player1;
 Player player2;
@@ -23,11 +24,16 @@ void setup() {
   player2 = new Player(width/2+20, width);
   net = new Walls();
 
-  c = new Client(this, "10.128.136.193", 8080);
+  c = new Client(this, "localhost", 8080);
 }
 
-void draw() {  
-  c.write(mouseX + " " + "0" + "\n");
+void draw() {
+  c.write(mouseX + " ");
+  if (started)
+    c.write("1 ");
+  else
+    c.write("0 ");
+  c.write("\n");
 
   if (c.available() > 0) {
     data = readFromServer();
@@ -42,8 +48,7 @@ void draw() {
 }
 
 void mousePressed() {
-  c.write(mouseX + " " + "1" + "\n");  //start command
-  println("sent started");
+  started = true;
 }
 
 float[] readFromServer() {
