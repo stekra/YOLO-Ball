@@ -94,7 +94,8 @@ void draw() {
 
 float[] readFromClient() {
   input = c.readString(); 
-  input = input.substring(0, input.indexOf("\n"));
+  if (input != null)
+    input = input.substring(0, input.indexOf("\n"));
   float[] array = float(split(input, ' '));
 
   return array;

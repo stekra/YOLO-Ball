@@ -3,6 +3,7 @@ import processing.net.*;
 //network stuff
 Client c;
 String input;
+String output;
 float[] data = {0, width/2+20, width/2, height/2}; //content: [player1X, player2X, ballX, ballY]
 
 ArrayList<Ball> ballList = new ArrayList <Ball>();
@@ -24,16 +25,18 @@ void setup() {
   player2 = new Player(width/2+20, width);
   net = new Walls();
 
-  c = new Client(this, "localhost", 8080);
+  c = new Client(this, "10.128.136.193", 8080);
 }
 
 void draw() {
-  c.write(mouseX + " ");
+  output = mouseX + " ";
+
   if (started)
-    c.write("1 ");
+    output += "1 ";
   else
-    c.write("0 ");
-  c.write("\n");
+    output += "0 ";
+    
+  c.write(output + "\n");
 
   if (c.available() > 0) {
     data = readFromServer();

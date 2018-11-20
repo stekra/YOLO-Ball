@@ -19,7 +19,7 @@ class Player {
   void movement(float mousePos) {
     x = lerp(x, mousePos - (xWidth/2), lerpAmount);
     x = constrain(x,constrainLeft, constrainRight-xWidth);
-    display();
+    //display();
     colisionBall();
     px = x;
   }
