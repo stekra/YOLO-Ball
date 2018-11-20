@@ -48,11 +48,6 @@ void draw() {
     println("received start cmd");
   }
 
-  data[2] = activeBall.position.x;
-  data[3] = activeBall.position.y;
-
-  s.write(inputData[0] + " " + inputData[0] + " " + data[2] + " " + data[3] + "\n");
-
   connected = clients.size();
 
   //server interface
@@ -67,11 +62,19 @@ void draw() {
   stroke(255);
   rect(10, 10, width - 20, height - 20);
 
+  //GAME LOGIC
+  if (c != null) {
+    if (clients.indexOf(c.ip()) == 0)
+      player1.movement(inputData[0]);
+    else
+      player2.movement(inputData[0]);
+  }
+
   //ball calculation
   if (started) {
     for (int i = 0; i < ballList.size(); i++) {
       ballList.get(i).movement();
-      
+
       if (ballList.get(i).outOfBounds()) {
         ballList.remove(i);
 
@@ -81,13 +84,13 @@ void draw() {
       }
     }
   }
-}
 
-//void mousePressed() {
-//  //Ball newBall = new Ball();
-//  //ballList.add(newBall);
-//  started = true;
-//}
+  //data to server
+  data[2] = activeBall.position.x;
+  data[3] = activeBall.position.y;
+
+  s.write(player1.x + " " + player2.x + " " + data[2] + " " + data[3] + "\n");
+}
 
 float[] readFromClient() {
   input = c.readString(); 

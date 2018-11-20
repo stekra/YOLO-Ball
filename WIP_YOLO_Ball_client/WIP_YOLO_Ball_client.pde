@@ -41,8 +41,12 @@ void draw() {
 
   background(0);
   fill(255);
-  player1.movement(data[0]);
-  player2.movement(data[0]);
+  
+  player1.x = data[0];
+  player2.x = data[1];
+  player1.display();
+  player2.display();
+  
   ellipse(data[2], data[3], 30, 30);
   drawNet();
 }
