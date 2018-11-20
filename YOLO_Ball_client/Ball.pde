@@ -1,7 +1,7 @@
 class Ball {
   float x = width/2;
   float y = height/2;
-  float size = random(20,45);
+  float size = random(20, 45);
   float radius = size / 2;
   float grav = size/60;
   float airFriction = size/300;
@@ -27,16 +27,14 @@ class Ball {
     }
     colisionWithNet();
     colisionWithPickUp();
-    
+
     // xSpeed reduction
     if (velocity.x < 0) {
       velocity.x += airFriction;
-    }
-    
-    else if (velocity.x > 0) {
+    } else if (velocity.x > 0) {
       velocity.x -= airFriction;
     }
-    if (velocity.x > -0.09 && velocity.x < 0.09){
+    if (velocity.x > -0.09 && velocity.x < 0.09) {
       velocity.x = 0;
     }
 
@@ -51,12 +49,12 @@ class Ball {
     ellipse(position.x, position.y, size, size);
     offScreenDisplay();
   }
-  
+
   void offScreenDisplay() {
     if (position.y < 0) {
       noStroke();
       fill(255, 100-position.y*2);
-      triangle(position.x, 11, position.x+5, 20,position.x-5, 20);
+      triangle(position.x, 11, position.x+5, 20, position.x-5, 20);
     }
   }
 
@@ -69,26 +67,24 @@ class Ball {
     if (position.y > height) {
       if (position.x > width/2 && !startScreen) {
         scoreTeam1++;
-      }
-      else if (position.x < width/2 && !startScreen) {
+      } else if (position.x < width/2 && !startScreen) {
         scoreTeam2++;
       }
       return true;
-    } 
-    else {
+    } else {
       return false;
     }
   }
   void colisionWithPickUp() {
     if (position.x+radius > pickUp.x && position.x-radius < pickUp.x+pickUp.xWidth && position.y+radius > pickUp.y && position.y-radius < pickUp.y && startScreen == false) {
-      size = random(20,45);
+      size = random(20, 45);
       radius = size / 2;
       grav = size/60;
       airFriction = size/300;
-      pickUp.y = random(100,230);
+      pickUp.y = random(100, 230);
     }
   }
-  
+
   void colisionWithNet() {
     if (position.x+radius > net.x && position.x-radius < net.x+net.xWidth && position.y+radius > net.y && startScreen == false && endScreen == false) {
       //horicontal Bounce
@@ -96,20 +92,16 @@ class Ball {
         jump(10);
         //check if on net and slow
         if (velocity.x < 1 && velocity.x > -1) {
-          if (position.x > width/2){ 
+          if (position.x > width/2) { 
             velocity.x += 3;
-          }
-          else {
+          } else {
             velocity.x -= 3;
           }
         }
-      }
-      else if (velocity.x > 0) {
+      } else if (velocity.x > 0) {
         velocity.x *= -1;
         position.x -= 1;
-      }
-      
-      else if (velocity.x < 0) {
+      } else if (velocity.x < 0) {
         velocity.x *= -1;
         position.x += 1;
       }

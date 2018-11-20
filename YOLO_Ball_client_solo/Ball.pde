@@ -42,6 +42,7 @@ class Ball {
 
     velocity.y += grav;
     position.add(velocity);
+    display();
   }
 
   void display() {
@@ -84,7 +85,7 @@ class Ball {
       radius = size / 2;
       grav = size/60;
       airFriction = size/300;
-      pickUp.y = random(0,height-240);
+      pickUp.y = random(100,230);
     }
   }
   
