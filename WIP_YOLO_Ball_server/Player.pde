@@ -16,11 +16,11 @@ class Player {
     this.constrainRight = cR;
   }
 
-  void movement(float mousePos) {
-    x = lerp(x, mousePos - (xWidth/2), lerpAmount);
+  void movement() {
+    x = lerp(x, mouseX - (xWidth/2), lerpAmount);
     x = constrain(x,constrainLeft, constrainRight-xWidth);
     display();
-    //colisionBall();
+    colisionBall();
     px = x;
   }
 
@@ -39,7 +39,6 @@ class Player {
       }
     }
   }
-  
   float playerSpeed () {
     return x - px;    
   }

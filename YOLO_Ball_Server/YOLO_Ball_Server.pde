@@ -4,9 +4,11 @@ Server s;
 Client c;
 int port = 8080;
 String input;
-int[] data;
+int[] data = {0, width/2+20, width/2, height/2};
 ArrayList<String> clients = new ArrayList<String>();
 int connected;
+int x;
+int y = 500;
 
 void setup() {
   size(400, 400);
@@ -16,11 +18,13 @@ void setup() {
 }
 
 void draw() {
+  c = s.available();
+  
   if (c != null) {
     data = readFromClient();
   }
 
-  s.write(connected + "\n");
+  s.write(data[0] + " " + y + " 480 270" + "\n");
 
   connected = clients.size();
 
