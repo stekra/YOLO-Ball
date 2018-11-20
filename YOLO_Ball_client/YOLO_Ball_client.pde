@@ -63,9 +63,6 @@ void draw() {
 
   state = int(data[6]);
 
-  println(data);
-  println();
-
   if (state == 0) {
     startScreen();
 
