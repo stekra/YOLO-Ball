@@ -14,11 +14,17 @@ ArrayList<Ball> ballList = new ArrayList <Ball>();
 Ball activeBall;
 int scoreTeam1 = 0;
 int scoreTeam2 = 0;
+int winCondition = 10;
+float leftWon = 0;
+boolean startScreen = true;
+boolean endScreen = false;
 boolean started = false;
+int state = 0;  //0: start, 1: game, 2: end
 
 Player player1;
 Player player2;
 Walls net;
+PickUp pickUp;
 
 void setup() {
   size(960, 540);
@@ -27,6 +33,7 @@ void setup() {
   player1 = new Player(0, width/2-20);
   player2 = new Player(width/2+20, width);
   net = new Walls();
+  pickUp = new PickUp();
 
   Ball newBall = new Ball();
   activeBall = newBall;
@@ -42,8 +49,12 @@ void draw() {
     inputData = readFromClient();
   }
 
-  if (inputData[1] == 1f)
-    started = true;
+  if (inputData[1] == 1f) {
+    if (state == 0)
+      state++;
+    if (state == 2)
+      state--;
+  }
 
   connected = clients.size();
 
@@ -58,7 +69,18 @@ void draw() {
   noFill();
   stroke(255);
   rect(10, 10, width - 20, height - 20);
-  
+
+  if (state == 0) {
+    startScreen = true;
+    endScreen = false;
+  } else if (state == 1) {
+    startScreen = false;
+    endScreen = false;
+  } else if (state == 2) {
+    startScreen = false;
+    endScreen = true;
+  }
+
   gaem();
 
   //data to clients
@@ -68,6 +90,10 @@ void draw() {
   output += activeBall.position.y + " ";
   output += scoreTeam1 + " ";
   output += scoreTeam2 + " ";
+  output += state + " ";
+  output += pickUp.y + " ";
+  output += leftWon + " ";
+  output += activeBall.size;
 
   s.write(output + "\n");
 }
@@ -81,7 +107,7 @@ void gaem() {
   }
 
   //ball calculation
-  if (started) {
+  if (state == 1) {
     for (int i = 0; i < ballList.size(); i++) {
       ballList.get(i).movement();
 
@@ -93,6 +119,24 @@ void gaem() {
         ballList.add(newBall);
       }
     }
+  }
+
+  determineWinner();
+}
+
+void determineWinner() {
+  if (scoreTeam1 >= winCondition) {
+    leftWon = 1;
+
+    state++;
+    scoreTeam1 = 0;
+    scoreTeam2 = 0;
+  } else if (scoreTeam2 >= winCondition) {
+    leftWon = 0;
+
+    state++;
+    scoreTeam1 = 0;
+    scoreTeam2 = 0;
   }
 }
 
