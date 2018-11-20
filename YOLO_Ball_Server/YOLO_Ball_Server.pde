@@ -5,7 +5,7 @@ Client c;
 int port = 8080;
 String input;
 int[] data;
-ArrayList<Client> clients = new ArrayList<Client>();
+ArrayList<String> clients = new ArrayList<String>();
 int connected;
 
 void setup() {
@@ -28,7 +28,9 @@ void draw() {
   textSize(12);
   textAlign(CENTER, CENTER);
   fill(255);
-  text("Y\nO\nL\nO\n\nB\nA\nL\nL\n\n\nSERVER STARTED @\n" + Server.ip() + "\nON PORT " + port + "\n\nCLIENTS CONNECTED:\n" + connected + "/2", width / 2, height / 2.05);
+  text("Y\nO\nL\nO\n\nB\nA\nL\nL\n\n\nSERVER STARTED @\n" + Server.ip()
+    + "\nON PORT " + port
+    + "\n\nCLIENTS CONNECTED:\n" + connected + "/2", width / 2, height / 2.05);
   noFill();
   stroke(255);
   rect(10, 10, width - 20, height - 20);
@@ -44,14 +46,14 @@ int[] readFromClient() {
 
 void serverEvent(Server serv, Client clie) {
   println("client connected: " + clie.ip());
-  
-  if (!clients.contains(clie))
-    clients.add(clie);
+
+  if (!clients.contains(clie.ip()))
+    clients.add(clie.ip());
 }
 
 void disconnectEvent(Client clie) {
   println("client disconnected: " + clie.ip());
-  
+
   if (clients.contains(clie))
     clients.remove(clie);
 }
