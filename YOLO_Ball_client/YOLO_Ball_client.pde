@@ -4,6 +4,7 @@ int scoreTeam2 = 0;
 
 Player player1;
 Player player2;
+Walls net;
 
 void settings() {
   int canvasSize = 60;
@@ -13,6 +14,7 @@ void settings() {
 void setup() {
   player1 = new Player(0,width/2-20);
   player2 = new Player(width/2+20, width);
+  net = new Walls();
   noSmooth();
 }
 

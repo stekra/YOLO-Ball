@@ -5,7 +5,7 @@ class Ball {
   float radius = size / 2;
   float grav = size/60;
   float airFriction = size/300;
-  float jumpForce = 20;
+  float jumpForce;
   int random = -1 + (int)random(2) * 2;
 
   float xSpeed = -7 * random;
@@ -25,6 +25,8 @@ class Ball {
       position.x = width - radius;
       velocity.x *= -1;
     }
+    colisionWithNet();
+    
     // xSpeed reduction
     if (velocity.x < 0) {
       velocity.x += airFriction;
@@ -44,7 +46,7 @@ class Ball {
     ellipse(position.x, position.y, size, size);
   }
 
-  void jump() {
+  void jump(float jumpForce) {
     velocity.y = 0;
     velocity.y -= jumpForce;
   }
@@ -61,6 +63,26 @@ class Ball {
     } 
     else {
       return false;
+    }
+  }
+  void colisionWithNet() {
+    if (position.x+radius > net.x && position.x-radius < net.x+net.xWidth && position.y+radius > net.y) {
+      //horicontal Bounce
+      if (velocity.y > 0 && position.y+radius < net.y+10) {
+        jump(10);
+        if (velocity.x < 1 && velocity.x > -1) {
+          velocity.x += 3;
+        }
+      }
+      else if (velocity.x > 0) {
+        velocity.x *= -1;
+        position.x -= 1;
+      }
+      
+      else if (velocity.x < 0) {
+        velocity.x *= -1;
+        position.x += 1;
+      }
     }
   }
 }

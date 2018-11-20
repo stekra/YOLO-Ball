@@ -1,12 +1,19 @@
 void drawNet() {
   color netColor = 255; 
   
+  netWalls();
   textAlign(CENTER);
   noStroke();
   fill(netColor);
   textSize(15);
   text("Y\nO\nL\nO\n \nB\nA\nL\nL",width/2,height-224);
   drawScore();
+}
+
+void netWalls() {
+  stroke(255);
+  noFill();
+  rect(net.x,net.y,net.xWidth,net.yHeight);
 }
 
 void drawScore() {
