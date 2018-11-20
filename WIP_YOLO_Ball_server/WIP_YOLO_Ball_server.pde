@@ -4,8 +4,7 @@ import processing.net.*;
 Client c;
 Server s;
 int port = 8080;
-String input;
-float[] data = {0, width/2+20, width/2, height/2};  //content: [player1X, player2X ballX, ballY]
+String output;
 float[] inputData = {0, 0};
 ArrayList<String> clients = new ArrayList<String>();
 int connected;
@@ -24,6 +23,7 @@ Walls net;
 void setup() {
   size(960, 540);
   pixelDensity(displayDensity());
+  frameRate(30);
 
   player1 = new Player(0, width/2-20);
   player2 = new Player(width/2+20, width);
@@ -43,10 +43,8 @@ void draw() {
     inputData = readFromClient();
   }
 
-  if (inputData[1] == 1f) {
+  if (inputData[1] == 1f)
     started = true;
-    println("received start cmd");
-  }
 
   connected = clients.size();
 
@@ -61,8 +59,21 @@ void draw() {
   noFill();
   stroke(255);
   rect(10, 10, width - 20, height - 20);
+  
+  gaem();
 
-  //GAME LOGIC
+  //data to clients
+  output  = player1.x + " ";
+  output += player2.x + " ";
+  output += activeBall.position.x + " ";
+  output += activeBall.position.y + " ";
+  output += scoreTeam1 + " ";
+  output += scoreTeam2 + " ";
+
+  s.write(output + "\n");
+}
+
+void gaem() {
   if (c != null) {
     if (clients.indexOf(c.ip()) == 0)
       player1.movement(inputData[0]);
@@ -84,16 +95,10 @@ void draw() {
       }
     }
   }
-
-  //data to server
-  data[2] = activeBall.position.x;
-  data[3] = activeBall.position.y;
-
-  s.write(player1.x + " " + player2.x + " " + data[2] + " " + data[3] + "\n");
 }
 
 float[] readFromClient() {
-  input = c.readString(); 
+  String input = c.readString(); 
   if (input != null)
     input = input.substring(0, input.indexOf("\n"));
   float[] array = float(split(input, ' '));

@@ -2,9 +2,8 @@ import processing.net.*;
 
 //network stuff
 Client c;
-String input;
 String output;
-float[] data = {0, width/2+20, width/2, height/2}; //content: [player1X, player2X, ballX, ballY]
+float[] data = {0, width/2+20, width/2, height/2, 0, 0}; //content: [player1X, player2X, ballX, ballY]
 
 ArrayList<Ball> ballList = new ArrayList <Ball>();
 int scoreTeam1 = 0;
@@ -18,9 +17,12 @@ Walls net;
 void settings() {
   int canvasSize = 60;
   size(canvasSize*16, canvasSize*9);
+  pixelDensity(displayDensity());
 }
 
 void setup() {
+  frameRate(120);
+
   player1 = new Player(0, width/2-20);
   player2 = new Player(width/2+20, width);
   net = new Walls();
@@ -35,7 +37,7 @@ void draw() {
     output += "1 ";
   else
     output += "0 ";
-    
+
   c.write(output + "\n");
 
   if (c.available() > 0) {
@@ -44,12 +46,16 @@ void draw() {
 
   background(0);
   fill(255);
-  
+
   player1.x = data[0];
   player2.x = data[1];
   player1.display();
   player2.display();
-  
+
+  scoreTeam1 = int(data[4]);
+  scoreTeam2 = int(data[5]);
+
+
   ellipse(data[2], data[3], 30, 30);
   drawNet();
 }
@@ -59,7 +65,7 @@ void mousePressed() {
 }
 
 float[] readFromServer() {
-  input = c.readString(); 
+  String input = c.readString(); 
   input = input.substring(0, input.indexOf("\n"));
   float[] array = float(split(input, ' '));
 
