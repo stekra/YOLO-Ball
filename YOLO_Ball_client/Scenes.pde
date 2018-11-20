@@ -39,6 +39,19 @@ void startScreen() {
   textSize(25);
   text("a Game Frame I Project\nby Stefan Kraft && Moreno Vogel",width/2,300);
   
-  text("Press Space to Start", width/2,410);
+  text("Press [SPACE] to Start", width/2,410);
+}
+void endScreen(String team) {
+  color startScreenColor = 255;
+  background(0);
+  textAlign(CENTER);
+  noStroke();
+  fill(startScreenColor);
+  textSize(150);
+  text(team +" WON",width/2,200);
   
+  textSize(25);
+  text("a Game Frame I Project\nby Stefan Kraft && Moreno Vogel",width/2,300);
+  
+  text("Press [SPACE] to Restart", width/2,410);
 }
