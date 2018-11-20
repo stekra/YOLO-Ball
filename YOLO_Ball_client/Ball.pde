@@ -26,6 +26,7 @@ class Ball {
       velocity.x *= -1;
     }
     colisionWithNet();
+    colisionWithPickUp();
     
     // xSpeed reduction
     if (velocity.x < 0) {
@@ -78,8 +79,18 @@ class Ball {
       return false;
     }
   }
+  void colisionWithPickUp() {
+    if (position.x+radius > pickUp.x && position.x-radius < pickUp.x+pickUp.xWidth && position.y+radius > pickUp.y && position.y-radius < pickUp.y && startScreen == false) {
+      size = random(20,45);
+      radius = size / 2;
+      grav = size/60;
+      airFriction = size/300;
+      pickUp.y = random(0,height-240);
+    }
+  }
+  
   void colisionWithNet() {
-    if (position.x+radius > net.x && position.x-radius < net.x+net.xWidth && position.y+radius > net.y && startScreen == false) {
+    if (position.x+radius > net.x && position.x-radius < net.x+net.xWidth && position.y+radius > net.y && startScreen == false && endScreen == false) {
       //horicontal Bounce
       if (velocity.y > 0 && position.y+radius < net.y+20) {
         jump(10);
