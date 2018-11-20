@@ -24,11 +24,14 @@ void draw() {
 
   connected = clients.size();
 
-  background(200);
+  background(0);
   textSize(12);
   textAlign(CENTER, CENTER);
-  fill(50);
-  text("Y\nO\nL\nO\n\nB\nA\nL\nL\n\n\nSERVER STARTED @\n" + Server.ip() + "\nON PORT " + port + "\n\nCLIENTS CONNECTED:\n" + connected + "/2", width / 2, height / 2.1);
+  fill(255);
+  text("Y\nO\nL\nO\n\nB\nA\nL\nL\n\n\nSERVER STARTED @\n" + Server.ip() + "\nON PORT " + port + "\n\nCLIENTS CONNECTED:\n" + connected + "/2", width / 2, height / 2.05);
+  noFill();
+  stroke(255);
+  rect(10, 10, width - 20, height - 20);
 }
 
 int[] readFromClient() {
