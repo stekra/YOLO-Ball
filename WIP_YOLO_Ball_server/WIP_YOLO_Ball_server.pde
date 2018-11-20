@@ -23,7 +23,6 @@ Walls net;
 void setup() {
   size(960, 540);
   pixelDensity(displayDensity());
-  frameRate(30);
 
   player1 = new Player(0, width/2-20);
   player2 = new Player(width/2+20, width);

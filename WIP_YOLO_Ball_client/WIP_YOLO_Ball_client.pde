@@ -21,8 +21,6 @@ void settings() {
 }
 
 void setup() {
-  frameRate(120);
-
   player1 = new Player(0, width/2-20);
   player2 = new Player(width/2+20, width);
   net = new Walls();
